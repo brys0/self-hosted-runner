@@ -18,12 +18,12 @@ RUN cd /home/docker && curl -o actions-runner-linux-x64-2.321.0.tar.gz -L https:
 # Change ownership to docker user and install dependencies
 RUN chown -R docker /home/docker
 
-# Copy the start script and make it executable
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
+COPY ./start.sh /home/docker/start.sh
+
+RUN chmod +x /home/docker/start.sh
 
 # Switch to docker user
 USER docker
 
 # Define the entrypoint
-ENTRYPOINT ["/start.sh"]
+ENTRYPOINT ["/home/docker/start.sh"]
